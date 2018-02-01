@@ -67,18 +67,29 @@ else if( isset($_POST['mail']) && isset($_POST['password'])){
 
 ?>
 
+
+
+
+
 <!DOCTYPE html>
-<html>
+<html lang="sv">
+	<head>
+		<meta charset="UTF-8">
+		<title>MAZE UF</title>
+		<link rel="stylesheet" type="text/css" href="../maze-css.css">
+		<link href="https://fonts.googleapis.com/css?family=Cabin+Condensed|Orbitron" rel="stylesheet">
+	</head>
 
-<head>
-	<title> Min sida </title>
-	<link rel="stylesheet" href="css.css">
-</head>
-
-
-<body>
-
-<?php 
+	<body>
+		<header>
+			<img id="logga" src="MaZe-UF-logga-vit.png" alt="logga">
+		</header>
+		<div class="ram">
+		<?php
+			include("../templates/meny.php");
+		?>
+		
+		<?php 
 
 if(!$_SESSION['loggedIn']){ // Om man inte är inloggad, visa formulär
 
@@ -127,7 +138,15 @@ echo "Välkommen till Maze UF " . $_SESSION['user_nickname'] . "!";
 }
 ?>
 	
+		</div>	
 
-</body>
+		<footer> 
+			<p> © Copyright - MAZE UF  <a href="mailto:ufmaze@gmail.com"> [Maila MAZE UF]  </a> </p> 
+		</footer>
 
+	</body>
 </html>
+
+
+
+

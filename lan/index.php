@@ -1,22 +1,23 @@
-<html>
+<!DOCTYPE html>
+<html lang="sv">
+	<head>
+		<meta charset="UTF-8">
+		<title>MAZE UF</title>
+		<link rel="stylesheet" type="text/css" href="../maze-css.css">
+		<link rel="stylesheet" type="text/css" href="lanCSS.css">
+		<link href="https://fonts.googleapis.com/css?family=Cabin+Condensed|Orbitron" rel="stylesheet">
+	</head>
 
+	<body>
+		<header>
+			<img id="logga" src="MaZe-UF-logga-vit.png" alt="logga">
+		</header>
+		<div class="ram">
+		<?php
+			include("../templates/meny.php");
+		?>
+		
 
-<head>
-
-	<link rel="stylesheet" href="css.css" />
-	<title> Maze UF</title>
-
-	
-	
-	
-</head>
-
-
-
-<body>
-
-<div id="seatmap">
-<br><br>
 
 <?php
 
@@ -73,12 +74,11 @@ while($table_row = mysqli_fetch_array($result)){
 	<?php
 		}
 		?>
-		<a href = "boka.php?chair_id=<?php echo $chair_row['chair_id'];?>"><div  class="chair <?php if($chair_row['chair_status'] == "BOOKED"){echo "taken";} ?> id="chair<?php echo $chair_row['chair_id'];?>"></div></a>
+		<a href = "index.php?chair_id=<?php echo $chair_row['chair_id'];?>"><div  class="chair <?php if($chair_row['chair_status'] == "BOOKED"){echo "taken";} ?> id="chair<?php echo $chair_row['chair_id'];?>"></div></a>
 		<?php
 		
 	}
 	?>
-	<div style="clear:left;height:50px;"></div>
 	<?php
 	
 }
@@ -90,8 +90,14 @@ while($table_row = mysqli_fetch_array($result)){
 
 
 
-</body>
+		
 
+		<footer> 
+			<p> © Copyright - MAZE UF  <a href="mailto:ufmaze@gmail.com"> [Maila MAZE UF]  </a> </p> 
+		</footer>
 
-
+	</body>
 </html>
+
+
+
