@@ -1,0 +1,22 @@
+.table{
+	width : 113px;
+	height :10px;
+	border: 2px solid black;
+	clear:left;
+	
+}
+
+.chair{
+	border-radius:100%;
+	border: 2px solid black;
+	width : 20px;
+	height :10px;
+	background-color:green;
+	float:left;
+	margin-right:3px;
+}
+
+.taken{
+	background-color:red;
+}
+
