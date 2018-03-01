@@ -26,6 +26,7 @@
 		  <a href="/mazeuf/lan/">LAN</a>  
 		  <a href="/mazeuf/login/">Registrera</a>
 		  <a href="/mazeuf/mazeuf/">Personal</a>
+		  <a href="/mazeuf/omoss/">Om oss</a>
 		</div>
 	  </li>
 	</ul>
