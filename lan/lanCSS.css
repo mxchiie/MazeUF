@@ -3,20 +3,23 @@
 	height :10px;
 	border: 2px solid black;
 	clear:left;
-	
+
 }
 
 .chair{
 	border-radius:100%;
-	border: 2px solid black;
+	border: 2px dotted black;
 	width : 20px;
-	height :10px;
-	background-color:green;
+	height :15px;
+	background-color:blue;
 	float:left;
-	margin-right:3px;
+	margin-right:5px;
 }
 
 .taken{
 	background-color:red;
 }
 
+.boka{
+	float:right;
+}
