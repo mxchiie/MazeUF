@@ -17,6 +17,48 @@
 			include("../templates/meny.php");
 		?>
 
+		
+		<?php
+		$dbc = mysqli_connect("localhost","root","","lan");
+
+		
+		if(isset($_POST['nyhet'])){
+			$text = $_POST['text'];
+				
+			// SKAPA EN TABELL FÖR NYHETER
+			$query = "INSERT INTO news ............ VALUES(....,'$text')";
+			
+			mysqli_query($dbc,$query);
+
+		}
+		
+		
+		
+		?>
+		
+		
+		
+		
+		<form method="POST" action="">
+		Välj LAN:<select type="text" name="lan_name">
+			<?php
+			$dbc = mysqli_connect("localhost","root","","lan");
+				
+				$query = "SELECT * FROM lans";
+				$result = mysqli_query($dbc,$query);
+				
+				while($row = mysqli_fetch_array($result)){
+					$name = $row['lan_name'];
+					$id = $row['lan_id'];
+					echo "<option value='$id'>$name</option>";
+				}
+				?>
+			</select><br>
+		Text till nyhet: <input type="text" name="text" /><br>
+		<input type="submit" name="nyhet" />
+		</form>
+		
+		
 <div class="formular">
 
 
@@ -55,7 +97,6 @@ LAN Namn:
 
 <select type="text" name="lan_name">
 <?php
-$dbc = mysqli_connect("localhost","root","","lan");
 	
 	$query = "SELECT * FROM lans";
 	$result = mysqli_query($dbc,$query);
