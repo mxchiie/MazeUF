@@ -33,7 +33,7 @@ Följ oss på sociala medier
 <nav>
 <p>
 Vi finns på Facebook och Instagram<br>
-<img src="fejsbuk.png"> 
+<img src="../bilder/fejsbuk.png" width="50"> 
 
 <br>
 Följ oss gärna för mer information <br>
