@@ -22,7 +22,8 @@
 
 <h1>Boka ett lan</h1>
 
-<form action="action_page.php">
+
+<form action="admin.php">
 <fieldset>
 <legend>Vi ska ha ett lan!</legend>
 LAN Namn: 
@@ -39,8 +40,43 @@ Börjar:
 
 Slutar:
 <input type="date" name="lan_end_date"><br>
+
+<input type="submit" value="Skapa LAN" name="lan">
+
 </fieldset>
 </form>
+<br><br><br>
+<form action="admin.php">
+<fieldset>
+<legend>Skapa bord!</legend>
+LAN Namn: 
+
+
+
+<select type="text" name="lan_name">
+<?php
+$dbc = mysqli_connect("localhost","root","","lan");
+	
+	$query = "SELECT * FROM lans";
+	$result = mysqli_query($dbc,$query);
+	
+	while($row = mysqli_fetch_array($result)){
+		$name = $row['lan_name'];
+		$id = $row['lan_id'];
+		echo "<option value='$id'>$name</option>";
+	}
+	?>
+</select><br>
+
+Pris per stol: 
+<input type="text" name="lan_place"><br>
+
+
+<input type="submit" value="Skapa bord" name="table">
+
+</fieldset>
+</form>
+
 
 </div>
 </div>
