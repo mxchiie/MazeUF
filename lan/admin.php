@@ -17,80 +17,110 @@
 			include("../templates/meny.php");
 		?>
 
-<div class="boka">
-
-<?php
-
-session_start();
-
-$dbc = mysqli_connect("localhost","root","","lan");
-
-
-if(isset($_GET['chair_id'])){
-
-	$chair_id = $_GET['chair_id'];
-
-	$query = "INSERT INTO bookings (booking_customer) VALUES (1)";
-	$result = mysqli_query($dbc,$query);
-
-
-	$query = "SELECT * FROM bookings ORDER BY booking_id DESC";
-	$result = mysqli_query($dbc,$query);
-	$booking_id = mysqli_fetch_array($result)['booking_id'];
-
-
-	$query = "INSERT INTO booking_info (booking_id,chair_id) VALUES ($booking_id,$chair_id)";
-	$result = mysqli_query($dbc,$query);
-
-	$query = "UPDATE chairs SET chair_status = 'BOOKED' WHERE chair_id = $chair_id";
-	$result = mysqli_query($dbc,$query);
-
-}
-
-
-$query = "SELECT * FROM tables";
-
-$result = mysqli_query($dbc,$query);
-
-while($table_row = mysqli_fetch_array($result)){
-
-	$table_id = $table_row['table_id'];
-
-	$query2 = "SELECT * FROM chairs WHERE chair_table_id = $table_id";
-
-	$result2 = mysqli_query($dbc,$query2);
-
-	$number_of_chairs = mysqli_num_rows($result2)+2;
-
-
-
-	$chair_no = 4;
-	while($chair_row = mysqli_fetch_array($result2)){
-		$chair_no+=1;
-		if($chair_no == floor($number_of_chairs/1)){
-			?>
-				<div class="table" style="width:<?php echo $number_of_chairs*15; ?>px"></div>
-
-	<?php
-		}
-		?>
-		<a href = "index.php?chair_id=<?php echo $chair_row['chair_id'];?>"><div  class="chair <?php if($chair_row['chair_status'] == "BOOKED"){echo "taken";} ?> id="chair<?php echo $chair_row['chair_id'];?>"></div></a>
+		
 		<?php
+		$dbc = mysqli_connect("localhost","root","","lan");
 
+		
+		if(isset($_POST['nyhet'])){
+			$text = $_POST['text'];
+				
+			// SKAPA EN TABELL FÖR NYHETER
+			$query = "INSERT INTO news ............ VALUES(....,'$text')";
+			
+			mysqli_query($dbc,$query);
+
+		}
+		
+		
+		
+		?>
+		
+		
+		
+		
+		<form method="POST" action="">
+		Välj LAN:<select type="text" name="lan_name">
+			<?php
+			$dbc = mysqli_connect("localhost","root","","lan");
+				
+				$query = "SELECT * FROM lans";
+				$result = mysqli_query($dbc,$query);
+				
+				while($row = mysqli_fetch_array($result)){
+					$name = $row['lan_name'];
+					$id = $row['lan_id'];
+					echo "<option value='$id'>$name</option>";
+				}
+				?>
+			</select><br>
+		Text till nyhet: <input type="text" name="text" /><br>
+		<input type="submit" name="nyhet" />
+		</form>
+		
+		
+<div class="formular">
+
+
+<h1>Boka ett lan</h1>
+
+
+<form action="admin.php">
+<fieldset>
+<legend>Vi ska ha ett lan!</legend>
+LAN Namn: 
+<input type="text" name="lan_name"><br>
+
+Plats: 
+<input type="text" name="lan_place"><br>
+
+Address: 
+<input type="text" name="lan_address"><br>
+
+Börjar: 
+<input type="date" name="lan_start_date"><br>
+
+Slutar:
+<input type="date" name="lan_end_date"><br>
+
+<input type="submit" value="Skapa LAN" name="lan">
+
+</fieldset>
+</form>
+<br><br><br>
+<form action="admin.php">
+<fieldset>
+<legend>Skapa bord!</legend>
+LAN Namn: 
+
+
+
+<select type="text" name="lan_name">
+<?php
+	
+	$query = "SELECT * FROM lans";
+	$result = mysqli_query($dbc,$query);
+	
+	while($row = mysqli_fetch_array($result)){
+		$name = $row['lan_name'];
+		$id = $row['lan_id'];
+		echo "<option value='$id'>$name</option>";
 	}
 	?>
-	<?php
+</select><br>
 
-}
+Pris per stol: 
+<input type="text" name="lan_place"><br>
 
-?>
+
+<input type="submit" value="Skapa bord" name="table">
+
+</fieldset>
+</form>
+
 
 </div>
 </div>
-
-
-
-
 
 		<footer>
 			<p> © Copyright - MAZE UF  <a href="mailto:ufmaze@gmail.com"> [Maila MAZE UF]  </a> </p>

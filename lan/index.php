@@ -8,89 +8,53 @@
 		<link href="https://fonts.googleapis.com/css?family=Cabin+Condensed|Orbitron" rel="stylesheet">
 	</head>
 
+	<style>
+	
+	a{
+		text-decoration:none;
+	}
+	
+	.lan_link{
+		
+		color: lightpink;
+		font-size: x-large;
+		font-family:Orbitron;
+		text-decoration: none;
+	}
+	
+	.lan_content{
+		margin-top:100px;
+	}
+	
+	</style>
+	
 	<body>
 		<header>
-			<img id="logga" src="MaZe-UF-logga-vit.png" alt="logga">
+			<img id="logga" src="../MaZe-UF-logga-vit.png" alt="logga">
 		</header>
 		<div class="ram">
 		<?php
 			include("../templates/meny.php");
 		?>
 
-<div class="boka">
+		<div class="lan_content">
+		<a href = "lan.php"> <p class="lan_link">Välj LAN</p></a>
 
-<?php
+		<a href = "bokning.php"> <p class="lan_link">Boka LAN</p></a>
 
-session_start();
-
-$dbc = mysqli_connect("localhost","root","","lan");
-
-
-if(isset($_GET['chair_id'])){
-
-	$chair_id = $_GET['chair_id'];
-
-	$query = "INSERT INTO bookings (booking_customer) VALUES (1)";
-	$result = mysqli_query($dbc,$query);
-
-
-	$query = "SELECT * FROM bookings ORDER BY booking_id DESC";
-	$result = mysqli_query($dbc,$query);
-	$booking_id = mysqli_fetch_array($result)['booking_id'];
-
-
-	$query = "INSERT INTO booking_info (booking_id,chair_id) VALUES ($booking_id,$chair_id)";
-	$result = mysqli_query($dbc,$query);
-
-	$query = "UPDATE chairs SET chair_status = 'BOOKED' WHERE chair_id = $chair_id";
-	$result = mysqli_query($dbc,$query);
-
-}
-
-
-$query = "SELECT * FROM tables";
-
-$result = mysqli_query($dbc,$query);
-
-while($table_row = mysqli_fetch_array($result)){
-
-	$table_id = $table_row['table_id'];
-
-	$query2 = "SELECT * FROM chairs WHERE chair_table_id = $table_id";
-
-	$result2 = mysqli_query($dbc,$query2);
-
-	$number_of_chairs = mysqli_num_rows($result2)+2;
-
-
-
-	$chair_no = 4;
-	while($chair_row = mysqli_fetch_array($result2)){
-		$chair_no+=1;
-		if($chair_no == floor($number_of_chairs/1)){
+		<?php
+		
+		session_start();
+		
+		if(isset($_SESSION['user_id']) && $_SESSION['user_id'] < 10){
 			?>
-				<div class="table" style="width:<?php echo $number_of_chairs*15; ?>px"></div>
-
-	<?php
+			<a href = "admin.php"> <p class="lan_link">ADMIN</p></a>
+			<?php
 		}
 		?>
-		<a href = "index.php?chair_id=<?php echo $chair_row['chair_id'];?>"><div  class="chair <?php if($chair_row['chair_status'] == "BOOKED"){echo "taken";} ?> id="chair<?php echo $chair_row['chair_id'];?>"></div></a>
-		<?php
 
-	}
-	?>
-	<?php
-
-}
-
-?>
 
 </div>
-</div>
-
-
-
-
 
 		<footer>
 			<p> © Copyright - MAZE UF  <a href="mailto:ufmaze@gmail.com"> [Maila MAZE UF]  </a> </p>

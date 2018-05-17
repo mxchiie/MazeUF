@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 	<head>
 		<meta charset="UTF-8">
 		<title>MAZE UF</title>
@@ -8,6 +9,54 @@
 		<link href="https://fonts.googleapis.com/css?family=Cabin+Condensed|Orbitron" rel="stylesheet">
 	</head>
 
+	<style>
+	a{
+		text-decoration:none;
+	}
+	.lan_container{
+		margin-left:200px;
+		width:300px;
+		background-color:pink;
+		border: 2px solid black;
+		height:150px;
+		margin-bottom:10px;
+	}
+	
+	.lan_container:hover{
+		cursor:pointer;
+		background-color:lightpink;
+	}
+	
+	.lan_name{
+		text-align:center;
+		font-size:25px;
+		margin:0px;
+	}
+	
+	.lan_at{
+		text-align:center;
+		font-size:13x;
+		margin:0px;
+	}
+	
+	.lan_place{
+		text-align:center;
+		font-size:20px;
+		margin:0px;	
+	}
+	
+	.lan_address, .lan_date{
+		text-align:center;
+		font-size:15px;
+		margin:10px;	
+	}
+	
+	.var{
+		color:red;
+	}
+	
+	</style>
+	
 	<body>
 		<header>
 			<img id="logga" src="MaZe-UF-logga-vit.png" alt="logga">
@@ -17,80 +66,38 @@
 			include("../templates/meny.php");
 		?>
 
-<div class="boka">
-
-<?php
-
-session_start();
-
-$dbc = mysqli_connect("localhost","root","","lan");
-
-
-if(isset($_GET['chair_id'])){
-
-	$chair_id = $_GET['chair_id'];
-
-	$query = "INSERT INTO bookings (booking_customer) VALUES (1)";
-	$result = mysqli_query($dbc,$query);
-
-
-	$query = "SELECT * FROM bookings ORDER BY booking_id DESC";
-	$result = mysqli_query($dbc,$query);
-	$booking_id = mysqli_fetch_array($result)['booking_id'];
-
-
-	$query = "INSERT INTO booking_info (booking_id,chair_id) VALUES ($booking_id,$chair_id)";
-	$result = mysqli_query($dbc,$query);
-
-	$query = "UPDATE chairs SET chair_status = 'BOOKED' WHERE chair_id = $chair_id";
-	$result = mysqli_query($dbc,$query);
-
-}
-
-
-$query = "SELECT * FROM tables";
-
-$result = mysqli_query($dbc,$query);
-
-while($table_row = mysqli_fetch_array($result)){
-
-	$table_id = $table_row['table_id'];
-
-	$query2 = "SELECT * FROM chairs WHERE chair_table_id = $table_id";
-
-	$result2 = mysqli_query($dbc,$query2);
-
-	$number_of_chairs = mysqli_num_rows($result2)+2;
-
-
-
-	$chair_no = 4;
-	while($chair_row = mysqli_fetch_array($result2)){
-		$chair_no+=1;
-		if($chair_no == floor($number_of_chairs/1)){
-			?>
-				<div class="table" style="width:<?php echo $number_of_chairs*15; ?>px"></div>
-
-	<?php
-		}
-		?>
-		<a href = "index.php?chair_id=<?php echo $chair_row['chair_id'];?>"><div  class="chair <?php if($chair_row['chair_status'] == "BOOKED"){echo "taken";} ?> id="chair<?php echo $chair_row['chair_id'];?>"></div></a>
 		<?php
+		
+		$dbc = mysqli_connect("localhost","root","","lan");
+		
+		if(isset($_GET['lanid'])){
+			
+		}
+		else{
 
-	}
-	?>
-	<?php
-
-}
-
-?>
-
-</div>
-</div>
-
-
-
-
+			$query = "SELECT * FROM lans";
+			$result = mysqli_query($dbc,$query);
+			
+			while($row = mysqli_fetch_array($result)){
+				?>
+				
+				<a href="?lanid=<?php echo $row['lan_id']; ?>"><div class="lan_container">
+				
+					<p class="lan_name">NTI LAN</p>
+					<p class="lan_at">PÅ</p>
+					<p class="lan_place">NTI Gymnasiet Göteborg</p>
+					<p class="lan_address"><span class="var">VAR? </span> Kronhusgatan 9</p>
+					<p class="lan_date"><span class="var">NÄR? </span> 9/11 - 12/11</p>
+				
+				</div></a>
+				
+				<?php
+				
+			}
+		
+		}
+		
+		?>
 
 		<footer>
 			<p> © Copyright - MAZE UF  <a href="mailto:ufmaze@gmail.com"> [Maila MAZE UF]  </a> </p>
