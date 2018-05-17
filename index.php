@@ -16,7 +16,14 @@
 			include("templates/meny.php");
 		?>
 		
-		CONTENT
+		<h1> Nyhetsflöde </h1>
+		<div class="rubrik"> <h3> NTI LAN I SKOLAN </h3>
+		<div class="text"><p> Den 13 till 14 April kommer vi ha ett LAN i skolan för alla gamla och nya elever på skolan <br> 
+		Vi kommer erbjuda turneringar med väldigt fina priser, bra musik samt ett underhållande LAN för alla deltagare. Mer info nedan.</p>		</div>
+		
+		<img src="../bilder/skollan.jpg" width="50"> 
+		<img src="../bilder/ntiregler.jpg" width="50%"> 
+		
 		
 		</div>	
 
