@@ -33,7 +33,7 @@
 		}
 		
 			// Användare vill skapa ett LAN
-			if(isset($_POST['name']) && (isset($_POST['place']) && (isset($_POST['address']) && (isset($_POST['start_date']) && (isset($_POST['end_date'])){
+			if(isset($_POST['name']) && isset($_POST['place']) && isset($_POST['address']) && isset($_POST['start_date']) && isset($_POST['end_date'])){
 				
 				$name = htmlspecialchars($_POST['name']);
 				$place = htmlspecialchars($_POST['place']);
@@ -42,13 +42,13 @@
 				$end_date = htmlspecialchars($_POST['end_date']);
 				
 				// Formulera frågan
-				$query "INSERT INTO lans (lan_name,lan_place,lan_address,lan_start_date,lan_end_date) VALUES ('$name','$place','$address','$start_date','$end_date')";
+				$query ="INSERT INTO lans (lan_name,lan_place,lan_address,lan_start_date,lan_end_date) VALUES ('$name','$place','$address','$start_date','$end_date')";
 				
 			}
 			
 				if(isset($_POST['table'])){
-					$table = htmlspecialchars ($_POST['table']);
-					$query "INSERT INTO tables (table_prices) VALUES ('$table')";
+					$table = htmlspecialchars($_POST['table']);
+					$query = "INSERT INTO tables (table_prices) VALUES ('$table')";
 				}
 		
 		?>
