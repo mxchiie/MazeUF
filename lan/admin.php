@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="sv">
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="UTF-8" />
 		<title>MAZE UF</title>
-		<link rel="stylesheet" type="text/css" href="../maze-css.css">
-		<link rel="stylesheet" type="text/css" href="lanCSS.css">
+		<link rel="stylesheet" type="text/css" href="../maze-css.css" />
+		<link rel="stylesheet" type="text/css" href="lanCSS.css" />
 		<link href="https://fonts.googleapis.com/css?family=Cabin+Condensed|Orbitron" rel="stylesheet">
 	</head>
 
@@ -24,15 +24,38 @@
 		
 		if(isset($_POST['nyhet'])){
 			$text = $_POST['text'];
+			$title = $_POST['title'];
+			$lan = $_POST['lan_name'];
 				
 			// SKAPA EN TABELL FÖR NYHETER
-			$query = "INSERT INTO news ............ VALUES(....,'$text')";
+			$query = "INSERT INTO news (news_lan,news_title,news_content) VALUES($lan,'$title','$text')";
+			
+			mysqli_query($dbc,$query);
+		}
+		
+		// Användare vill skapa ett LAN
+		if(isset($_POST['lan'])){
+			
+			$name = htmlspecialchars($_POST['name']);
+			$place = htmlspecialchars($_POST['place']);
+			$address = htmlspecialchars($_POST['address']);
+			$start_date = htmlspecialchars($_POST['start_date']);
+			$end_date = htmlspecialchars($_POST['end_date']);
+			
+			// Formulera frågan
+			$query ="INSERT INTO lans (lan_name,lan_place,lan_address,lan_start_date,lan_end_date) VALUES ('$name','$place','$address','$start_date','$end_date')";
 			
 			mysqli_query($dbc,$query);
 
 		}
-		
-		
+			
+		if(isset($_POST['table'])){
+			$price = htmlspecialchars($_POST['price']);
+			$lan_id = htmlspecialchars($_POST['lan_name']);
+			$query = "INSERT INTO tables (table_lan_id,table_price) VALUES ($lan_id,$price)";
+
+			mysqli_query($dbc,$query);
+		}
 		
 		?>
 		
@@ -54,6 +77,7 @@
 				}
 				?>
 			</select><br>
+		Titel till nyhet: <input type="text" name="title" /><br>
 		Text till nyhet: <input type="text" name="text" /><br>
 		<input type="submit" name="nyhet" />
 		</form>
@@ -65,30 +89,30 @@
 <h1>Boka ett lan</h1>
 
 
-<form action="admin.php">
+<form action="admin.php" method="POST">
 <fieldset>
 <legend>Vi ska ha ett lan!</legend>
 LAN Namn: 
-<input type="text" name="lan_name"><br>
+<input type="text" name="name"><br>
 
 Plats: 
-<input type="text" name="lan_place"><br>
+<input type="text" name="place"><br>
 
 Address: 
-<input type="text" name="lan_address"><br>
+<input type="text" name="address"><br>
 
 Börjar: 
-<input type="date" name="lan_start_date"><br>
+<input type="date" name="start_date"><br>
 
 Slutar:
-<input type="date" name="lan_end_date"><br>
+<input type="date" name="end_date"><br>
 
 <input type="submit" value="Skapa LAN" name="lan">
 
 </fieldset>
 </form>
 <br><br><br>
-<form action="admin.php">
+<form action="admin.php" method="POST">
 <fieldset>
 <legend>Skapa bord!</legend>
 LAN Namn: 
@@ -110,7 +134,7 @@ LAN Namn:
 </select><br>
 
 Pris per stol: 
-<input type="text" name="lan_place"><br>
+<input type="text" name="price"><br>
 
 
 <input type="submit" value="Skapa bord" name="table">
