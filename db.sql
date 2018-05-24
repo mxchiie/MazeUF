@@ -41,3 +41,11 @@ booking_status enum("BETALD","EJ BETALD") DEFAULT "EJ BETALD",
 FOREIGN KEY (booking_chair_id) REFERENCES chairs(chair_id),
 FOREIGN KEY (booking_user_id) REFERENCES users(user_id)
 );
+
+CREATE TABLE news(
+news_id int(8)PRIMARY KEY AUTO_INCREMENT,
+news_user varchar(10),
+news_title varchar(10),
+news_date datetime,
+news_content varchar(800),
+);
